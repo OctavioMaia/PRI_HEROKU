@@ -89,7 +89,7 @@ module.exports = function(passport) {
 
                     // check to see if theres already a user with that email
                     if (user) {
-                        return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                        return done(null, false);
                     } else {
                         // create the user
                         var newUser             = new User();
@@ -98,7 +98,7 @@ module.exports = function(passport) {
                         newUser.local.name      = req.body.name;
                         newUser.local.age       = req.body.age;
                         newUser.local.type      = 'user';
-                        newUser.local.confirmed = 'false'
+                        newUser.local.confirmed = 'true'
 
                         newUser.save(function(err) {
                             if (err)
@@ -215,7 +215,6 @@ module.exports = function(passport) {
                         }
                         return done(null, user);
                     } else {
-                        console.log("newUser")
                         var newUser          = new User();
 
                         newUser.google.id    = profile.id;
